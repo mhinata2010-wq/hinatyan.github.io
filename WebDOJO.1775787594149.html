@@ -1,0 +1,62 @@
+
+<!-- たくさんボールがでyをHTML1ファイルでつくって by OpenAI API -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>たくさんのボール</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .ball {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #3498db;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const numberOfBalls = 50;
+        const balls = [];
+
+        for (let i = 0; i < numberOfBalls; i++) {
+            let ball = document.createElement('div');
+            ball.classList.add('ball');
+            document.body.appendChild(ball);
+            balls.push(ball);
+        }
+
+        balls.forEach((el, i, ra) => {
+            let to = {
+                x: Math.random() * (i % 2 === 0 ? 1 : -1),
+                y: Math.random() * (i % 2 === 0 ? 1 : -1)
+            };
+
+            let anim = el.animate(
+                [
+                    { transform: `translate(0, 0)` },
+                    { transform: `translate(${to.x * window.innerWidth}px, ${to.y * window.innerHeight}px)` }
+                ],
+                {
+                    duration: (Math.random() + 1) * 2000, // ランダムな速度
+                    direction: 'alternate',
+                    iterations: Infinity,
+                    easing: 'ease-in-out'
+                }
+            );
+        });
+    </script>
+</body>
+</html>
